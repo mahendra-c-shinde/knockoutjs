@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<HTML>
+
+<head>
+    <script src="knockout-3.4.2.js">
+    </script>
+</head>
+
+<body>
+    <form data-bind="submit: addNewItem">
+        Add item: <input type="text" data-bind="value: newItem" />
+        <button type="submit" >Add</button>
+    </form>
+     
+    <p>Your values:</p>
+    <select multiple="multiple" height="5" data-bind="options: items"  > </select>
+     
+    <div>
+        <button data-bind="click: removeItems" >Remove</button>
+        <button data-bind="click: sortThis">Sort</button>
+    </div>
+</body>
+
+<script>
+   var viewModel = function(){
+      this.items = ko.observableArray(["Mercury","Venus","Mars","Earth","Jupiter","Saturn"]);
+      this.newItem = ko.observable('');
+      this.selectedItems = ko.observableArray(["Earth"]);
+
+        this.removeItems = function (){
+            this.items.removeAll(this.selectedItems());
+            this.selectedItems([]);//Reset the selection
+        }
+
+      this.addNewItem = function(){
+          if ( this.newItem() != "" ){
+              this.items.push(this.newItem());
+              this.newItem("");//reset the textfield
+          }
+      }.bind(this);
+
+      this.sortThis = function(){
+          this.items.sort();
+      }
+  }
+    ko.applyBindings(new viewModel());
+</script>
+
+</HTML>
