@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<HTML>
+<head>
+    <script src="knockout-3.4.2.js">
+    </script>
+</head>
+<body>
+        Show:
+        <label><input type='radio' name="type" value='all' data-bind='checked: showType' />All</label>
+        <label><input type='radio' name="type" value='rock' data-bind='checked: showType' />Rocky planets</label>
+        <label><input type='radio' name="type" value='gasgiant' data-bind='checked: showType' />Gas giants</label>
+        You have selected <span data-bind="text: showType"></span>
+    <table>
+
+    <tbody data-bind="foreach: planets">
+        <tr >
+            <td data-bind="text: name "></td>
+            <td data-bind="text: type"></td>
+        </tr>
+    </tbody>
+    </table>
+</body>
+<script>
+    var viewModel = function(){
+        this.planets = ko.observableArray([
+        { name: "Mercury", type: "rock"},
+        { name: "Venus", type: "rock"},
+        { name: "Earth", type: "rock"},
+        { name: "Mars", type: "rock"},
+        { name: "Jupiter", type: "gasgiant"},
+        { name: "Saturn", type: "gasgiant"},
+        { name: "Uranus", type: "gasgiant"},
+        { name: "Neptune", type: "gasgiant"}
+    ]);
+        this.showType = ko.observable('all');
+
+    }
+    ko.applyBindings(new viewModel());
+</script>
+
+</HTML>
