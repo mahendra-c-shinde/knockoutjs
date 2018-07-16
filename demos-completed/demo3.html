@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<HTML>
+
+<head>
+    <script src="knockout-3.4.2.js">
+    </script>
+</head>
+
+<body>
+    <form data-bind="submit: addNewItem">
+        New item:
+        <input data-bind="value: newItem" />
+        <button type="submit" data-bind="enable: newItem().trim().length>0" >Add</button>
+        <p>Your items:</p>
+        <select multiple="multiple" width="50" data-bind="options: items" > </select>
+    </form>
+</body>
+
+<script>
+  var viewModel = function(items){
+      this.items = ko.observableArray(items);
+      this.newItem = ko.observable('');
+
+      this.addNewItem = function(){
+          if ( this.newItem() != "" ){
+              this.items.push(this.newItem());
+              this.newItem("");//reset the textfield
+          }
+      }.bind(this);
+  }
+    ko.applyBindings(new viewModel(["Mercury","Venus","Mars","Earth","Jupiter","Saturn"]));
+</script>
+
+</HTML>
