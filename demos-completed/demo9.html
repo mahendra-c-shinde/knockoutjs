@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="knockout-3.4.2.js">
+    </script>
+</head>
+<script type="text/html" id="person-template">
+    <table>
+        <td>Name : </td><td data-bind="text: name"></td>
+        <td>Outstanding balance : </td><td data-bind="text: outstanding"></td>
+        <td>Phone No. : </td><td data-bind="text: contact"></td>
+    </table>
+</script>
+
+<h2>The Customer details</h2>
+<div data-bind="template: {name: 'person-template', data: customer}"></div>
+
+<h2>The Suppllier details</h2>
+<div data-bind="template: {name: 'person-template', data: supplier}"></div>
+
+<script>
+var viewModel = function(){
+    this.customer = {name:'Franklin', outstanding: 20000, contact: 9822222552};
+    this.supplier = {name:'Mario', outstanding: 50000, contact:985644444};
+}
+
+ko.applyBindings(new viewModel());
+</script>
+</html>
