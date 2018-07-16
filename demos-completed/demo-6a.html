@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<HTML>
+<head>
+    <script src="knockout-3.4.2.js">
+    </script>
+</head>
+
+<body>
+<h2>Table Demo</h2>
+<table>
+<thead>
+    <tr>
+        <td>User ID</td>
+        <td>title</td>
+        <td>body</td>
+    </tr>
+</thead>
+<tbody data-bind="foreach: data">
+    <tr>
+        <td data-bind="text: id"></td>
+        <td data-bind="text: title">title</td>
+        <td data-bind="text: body">body</td>
+    </tr>
+</tbody>
+</table>
+
+</body>
+
+<script>
+var User = function(userid, title, body)
+{
+    this.id = userid;
+    this.title = title;
+    this.body = body;
+}
+var viewModel = function(){
+  this.data = ko.observableArray([
+      new User(101,'Mahendra','Training Consultant'),
+      new User(102,'Dakshata','Student')
+  ]);
+}
+ko.applyBindings(new viewModel());
+
+</script>
+</HTML>
